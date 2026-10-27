@@ -1,0 +1,1279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>HelloWorld — Portfolio</title>
+
+  <style>
+
+    :root {
+      --paper: #f3f1eb;
+      --ink: #171717;
+      --muted: #777;
+      --line: #cfcac0;
+      --white: #faf9f5;
+      --accent: #b9b4a8;
+
+      --max-width: 1050px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background:
+      radial-gradient(circle at 10% 10%, rgba(255, 182, 213, 0.35), transparent 28%),
+      radial-gradient(circle at 90% 20%, rgba(190, 170, 255, 0.30), transparent 30%),
+      radial-gradient(circle at 50% 90%, rgba(255, 190, 140, 0.22), transparent 32%),
+      #f8f2f5;
+      color: var(--ink);
+      font-family:
+        "Courier New",
+        Courier,
+        monospace;
+      line-height: 1.5;
+      padding-top: 72px; /* Prevents content from hiding behind the fixed header */
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .container {
+      width: min(100% - 40px, var(--max-width));
+      margin: auto;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(255, 248, 252, 0.90);
+      border-bottom: 1px dashed #d8b8cc;
+      box-shadow: 0 3px 18px rgba(145, 105, 135, 0.10);
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+    }
+
+    .nav {
+      min-height: 72px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-size: 14px;
+      font-weight: bold;
+      letter-spacing: -0.05em;
+    }
+
+    .logo::before {
+      content: "♡ ";
+      color: #ff8fab;
+    }
+
+    .logo::after {
+      content: " ♡";
+      color: #c084fc;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 25px;
+
+      list-style: none;
+      font-size: 12px;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+    }
+
+    .nav-links a:hover {
+      color: var(--ink);
+      text-decoration: underline;
+    }
+
+    .hero {
+      min-height: 75vh;
+
+      display: flex;
+      align-items: center;
+
+      border-bottom: 1px solid var(--line);
+    }
+
+    .hero-content {
+      width: 100%;
+    }
+
+    .small-label {
+      color: var(--muted);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      display: block;
+      text-align: center;
+    }
+
+    .hero-layout {
+      display: grid;
+      grid-template-columns: 1.5fr 0.7fr;
+      align-items: center;
+      gap: 60px;
+    }
+
+    .hero h1 {
+      max-width: 850px;
+
+      margin-top: 25px;
+
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(4rem, 11vw, 9rem);
+      font-weight: 400;
+
+      line-height: 0.82;
+      letter-spacing: -0.08em;
+    }
+
+    .hero h1 em {
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    .hero-image {
+      width: 100%;
+      aspect-ratio: 4 / 5;
+
+      border: 1px solid var(--line);
+      overflow: hidden;
+
+      background: #dedbd3;
+    }
+
+    .hero-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .hero-bottom {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+
+      margin-top: 80px;
+      gap: 40px;
+    }
+
+    .hero-description {
+      max-width: 650px;
+      color: #555;
+      font-size: 13px;
+      text-align: center;
+      margin: 0 auto;
+    }
+
+    .scroll-note {
+      color: var(--muted);
+      font-size: 11px;
+      white-space: nowrap;
+    }
+
+    section {
+      padding: 110px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .section-heading {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 30px;
+
+      margin-bottom: 65px;
+    }
+
+    .section-number {
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .section-title {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      font-weight: 400;
+      line-height: 0.95;
+      letter-spacing: -0.06em;
+    }
+
+
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 50px 25px;
+    }
+
+    .project-image {
+      position: relative;
+
+      aspect-ratio: 4 / 3;
+
+      background: linear-gradient(135deg, #ff9ecf, #b58cff, #ffad66, #ffd6f5, #9fffe0);
+      background-size: 300% 300%;
+      animation: rainbowBg 8s ease infinite;
+      border: 1px solid var(--line);
+
+      overflow: hidden;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .project-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center;
+    }
+
+    .project:nth-child(1) .project-image {
+      background: linear-gradient(135deg, #ff9ecf, #b58cff, #ffad66);
+    }
+
+    .project:nth-child(2) .project-image {
+      background: linear-gradient(135deg, #b58cff, #ff9ecf, #ffad66);
+    }
+
+    .project:nth-child(3) .project-image {
+      background: linear-gradient(135deg, #ffad66, #ff9ecf, #b58cff);
+    }
+
+    .project:nth-child(4) .project-image {
+      background: linear-gradient(135deg, #b58cff, #ffad66, #ff9ecf);
+    }
+
+    .project-image::after {
+      content: "PROJECT IMAGE";
+
+      color: rgba(0, 0, 0, 0.3);
+      font-size: 11px;
+      letter-spacing: 0.15em;
+    }
+
+    .project-info {
+      display: flex;
+      justify-content: space-between;
+
+      margin-top: 14px;
+
+      font-size: 12px;
+    }
+
+    .project-name {
+      font-weight: bold;
+    }
+
+    .project-type {
+      color: var(--muted);
+    }
+
+    .project:hover .project-image {
+      filter: contrast(0.9);
+    }
+
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 100px;
+    }
+
+    .about-note {
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .about-text {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(1.8rem, 4vw, 3.5rem);
+      line-height: 1.05;
+      letter-spacing: -0.04em;
+    }
+
+    .about-text span {
+      color: var(--muted);
+    }
+
+    .about-details {
+      margin-top: 45px;
+
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+
+      gap: 30px;
+
+      font-size: 12px;
+    }
+
+    .detail-label {
+      display: block;
+
+      margin-bottom: 5px;
+
+      color: var(--muted);
+      font-size: 10px;
+      text-transform: uppercase;
+    }
+
+
+    .services {
+      border-top: 1px solid var(--line);
+    }
+
+    .service {
+      display: grid;
+      grid-template-columns: 60px 1fr 1.5fr;
+
+      padding: 25px 0;
+
+      border-bottom: 1px solid var(--line);
+    }
+
+    .service-number {
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .service h3 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 25px;
+      font-weight: 400;
+    }
+
+    .service p {
+      max-width: 400px;
+
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .notes {
+      border-top: 1px solid var(--line);
+    }
+
+    .note {
+      display: grid;
+      grid-template-columns: 130px 1fr 30px;
+
+      align-items: center;
+
+      padding: 22px 0;
+
+      border-bottom: 1px solid var(--line);
+    }
+
+    .note-date {
+      color: var(--muted);
+      font-size: 10px;
+    }
+
+    .note-title {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 18px;
+    }
+
+    .note-arrow {
+      color: var(--muted);
+    }
+
+    .note:hover .note-title {
+      text-decoration: underline;
+    }
+
+
+    .contact {
+      padding: 150px 0;
+    }
+
+    .contact-title {
+      max-width: 850px;
+
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(3.5rem, 9vw, 8rem);
+      font-weight: 400;
+
+      line-height: 0.85;
+      letter-spacing: -0.08em;
+    }
+
+    .contact-title em {
+      color: var(--muted);
+    }
+
+    .contact-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+
+      margin-top: 70px;
+    }
+
+    .email {
+      font-size: 14px;
+      border-bottom: 1px solid var(--ink);
+      padding-bottom: 4px;
+    }
+
+    .email:hover {
+      color: var(--muted);
+      border-color: var(--muted);
+    }
+
+    .contact-location {
+      color: var(--muted);
+      font-size: 11px;
+      text-align: right;
+    }
+
+
+    footer {
+      padding: 25px 0;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+
+      color: var(--muted);
+      font-size: 10px;
+    }
+
+    @keyframes rainbowBg {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+
+
+
+    /* rainbow / cute gradient text */
+    .logo,
+    .nav-links a,
+    .small-label,
+    .hero h1,
+    .hero-description,
+    .scroll-note,
+    .section-number,
+    .section-title,
+    .project-name,
+    .project-type,
+    .about-note,
+    .about-text,
+    .detail-label,
+    .about-details,
+    .service-number,
+    .service h3,
+    .service p,
+    .note-date,
+    .note-title,
+    .note-arrow,
+    .contact-title,
+    .email,
+    .contact-location,
+    .footer-inner {
+      background: linear-gradient(
+        90deg,
+        #67e8f9,
+        #60a5fa,
+        #818cf8,
+        #a78bfa,
+        #f0abfc,
+        #67e8f9,
+        #38bdf8,
+        #818cf8
+      );
+      background-size: 300% auto;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: cuteTextRainbow 12s ease-in-out infinite;
+    }
+
+    .hero h1 em,
+    .contact-title em,
+    .about-text span {
+      background: linear-gradient(
+        90deg,
+        #22d3ee,
+        #60a5fa,
+        #a78bfa,
+        #f0abfc,
+        #22d3ee
+      );
+      background-size: 250% auto;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: cuteTextRainbow 10s ease-in-out infinite;
+    }
+
+    .project-image::after {
+      background: linear-gradient(90deg, #ff8fab, #a78bfa, #67e8f9, #ffb86c);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    @keyframes cuteTextRainbow {
+      0%   { background-position: 0% 50%; }
+      25%  { background-position: 100% 35%; }
+      50%  { background-position: 200% 65%; }
+      75%  { background-position: 300% 35%; }
+      100% { background-position: 400% 50%; }
+    }
+
+    /* floating cute emoji background */
+    body::before {
+      content: "♡  ✿  🌸  ☁️  ✦  🎀  ♡  🍓  🌷  ✧  🐰  💗  ✿  🧸  ☁️  🌈  ♡  🍒  ✦  🌸  🎀  🐻  💕  ✿  🍰  ☁️  ✧  🌷  ♡  🐰  🌸  💫  🎀  🍓  ✿  🧸  💗  ☁️  🌈  ♡  🍒  ✦  🌷  🐻  🎀  💕  ✿  🌸  ☁️  🐰  ♡";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      font-size: 18px;
+      line-height: 3.8;
+      letter-spacing: 22px;
+      word-spacing: 14px;
+      opacity: 0.28;
+      overflow: hidden;
+      white-space: normal;
+      transform: rotate(-3deg) scale(1.08);
+    }
+
+    body::after {
+      content: "✧   ♡   ✿   🎀   ☁️   🌸   ♡   🧸   ✦   🍓   🌷   💗   ☁️   🌈   ♡   🐰   ✿   🍒   🎀   ✧";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 45px;
+      font-size: 14px;
+      color: #b783a8;
+      opacity: 0.20;
+      transform: rotate(8deg) scale(1.12);
+    }
+
+    /* cute lo-fi theme */
+    body {
+      background-image:
+        radial-gradient(rgba(120, 90, 110, 0.07) 1px, transparent 1px),
+        radial-gradient(circle at 12% 15%, rgba(255, 177, 214, 0.22), transparent 25%),
+        radial-gradient(circle at 88% 28%, rgba(190, 165, 255, 0.20), transparent 28%),
+        radial-gradient(circle at 48% 88%, rgba(255, 194, 143, 0.18), transparent 30%);
+      background-size: 14px 14px, auto, auto, auto;
+      background-attachment: fixed;
+      position: relative;
+    }
+
+    header::after {
+      content: "✦  ♡  ✿  ☁  ✦";
+      position: absolute;
+      right: 18px;
+      top: 4px;
+      font-size: 9px;
+      letter-spacing: 5px;
+      color: #c79ab5;
+      pointer-events: none;
+    }
+
+    .logo {
+      color: #8e6682;
+      text-shadow: 1px 1px 0 #fff;
+    }
+
+    .nav-links a {
+      padding: 6px 9px;
+      border-radius: 999px;
+      transition: 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: #8e6682;
+      background: #f6dff0;
+      text-decoration: none;
+    }
+
+    .hero,
+    section {
+      border-bottom: 1px dashed #d9c4d1;
+    }
+
+    .hero h1,
+    .section-title,
+    .contact-title {
+      text-shadow: 2px 2px 0 rgba(255, 255, 255, 0.75);
+    }
+
+    .small-label {
+      color: #a47b98;
+    }
+
+    .hero-description,
+    .about-note,
+    .service p,
+    .contact-location {
+      color: #756873;
+    }
+
+    .scroll-note {
+      color: #a47b98;
+    }
+
+    .section-heading {
+      position: relative;
+    }
+
+    .section-heading::after {
+      content: "♡";
+      position: absolute;
+      right: 4px;
+      top: -12px;
+      color: #d69abd;
+      font-size: 22px;
+      transform: rotate(-12deg);
+    }
+
+    .project-image {
+      border: 2px solid rgba(190, 150, 180, 0.55);
+      border-radius: 18px;
+      box-shadow: 4px 5px 0 rgba(177, 139, 166, 0.14);
+    }
+
+    .project-info {
+      padding: 0 5px;
+    }
+
+    .project-name {
+      color: #805d76;
+    }
+
+    .service,
+    .note {
+      border-bottom: 1px dashed #d9c4d1;
+    }
+
+    .service:hover,
+    .note:hover {
+      background: rgba(255, 225, 242, 0.35);
+    }
+
+    .service h3,
+    .note-title {
+      color: #72536a;
+    }
+
+    .email {
+      color: #805d76;
+      border-bottom: 1px dashed #b789a7;
+    }
+
+    footer {
+      background: rgba(247, 230, 241, 0.45);
+    }
+
+    @media (max-width: 750px) {
+
+      .container {
+        width: min(100% - 28px, var(--max-width));
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
+        min-height: 80vh;
+      }
+
+      .hero h1 {
+        font-size: clamp(4rem, 20vw, 7rem);
+      }
+
+
+      .hero-layout {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .hero-image {
+        max-width: 280px;
+        justify-self: end;
+      }
+
+      .hero-bottom {
+        display: block;
+        margin-top: 60px;
+      }
+
+      .scroll-note {
+        display: block;
+        margin-top: 25px;
+      }
+
+      section {
+        padding: 80px 0;
+      }
+
+      .section-heading {
+        display: block;
+        margin-bottom: 45px;
+      }
+
+      .section-title {
+        margin-top: 20px;
+      }
+
+      .projects {
+        grid-template-columns: 1fr;
+      }
+
+      .about-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .about-details {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .service {
+        grid-template-columns: 40px 1fr;
+        gap: 10px;
+      }
+
+      .service p {
+        grid-column: 2;
+        margin-top: 8px;
+      }
+
+      .note {
+        grid-template-columns: 80px 1fr 20px;
+      }
+
+      .note-title {
+        font-size: 15px;
+      }
+
+      .contact {
+        padding: 100px 0;
+      }
+
+      .contact-bottom {
+        display: block;
+      }
+
+      .contact-location {
+        margin-top: 30px;
+        text-align: left;
+      }
+
+      .footer-inner {
+        display: block;
+      }
+
+      .footer-inner span:last-child {
+        display: block;
+        margin-top: 8px;
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="container nav">
+
+      <a href="#" class="logo">
+        LO-FI ART AND WEB-DESIGN
+      </a>
+
+      <nav>
+        <ul class="nav-links">
+          <li><a href="#work">work</a></li>
+          <li><a href="#about">about</a></li>
+          <li><a href="#services">services</a></li>
+          <li><a href="#notes">notes</a></li>
+          <li><a href="#contact">contact</a></li>
+        </ul>
+      </nav>
+
+    </div>
+  </header>
+
+  <main>
+
+    <section class="hero">
+      <div class="container hero-content">
+
+        <span class="small-label">
+          designer / developer / creative
+        </span>
+
+        <div class="hero-layout" style="display: flex; justify-content: center; text-align: center;">
+
+          <div class="hero-title">
+            <h1>
+              Making things<br>
+              <em>simple.</em>
+            </h1>
+          </div>
+
+        </div>
+
+        <div class="hero-bottom">
+
+          <p class="hero-description">
+            I'm <strong>Fortes, Robinson Darius E.</strong> I'm A 3rd year Student at Data Center College Of The Philippines I'm getting a BSIT course. I graduated as a highschool and SHS
+            at Baguio city national highschool. I have A lot of working experience including on, Working in Restaurant and Fast-food chain like mcdonald's, before I resign i have
+            Work their for 9 months, It was great even though it's exhausting and and night-shift overall it was a great experience and looking forward for my next work. I'm currently located at taloy sur, Benguet, and I'm a hard working student doing my
+            study very well.
+          </p>
+
+          <span class="scroll-note">
+            ↓ scroll to see my WORKS!!!
+          </span>
+
+        </div>
+
+      </div>
+    </section>
+
+    <section id="work">
+
+      <div class="container">
+
+        <div class="section-heading">
+
+          <span class="section-number">
+            01 / SELECTED WORK
+          </span>
+
+          <h2 class="section-title">
+            A few things<br>
+            I've made.
+          </h2>
+
+        </div>
+
+
+        <div class="projects">
+
+          <a href="#" class="project">
+
+            <div class="project-image">
+              <img src="test1.jpg" alt="Test photo">
+            </div>
+
+            <div class="project-info">
+              <span class="project-name">
+                North Studio
+              </span>
+
+              <span class="project-type">
+                Identity / 2026
+              </span>
+            </div>
+
+          </a>
+
+
+          <a href="#" class="project">
+
+            <div class="project-image">
+              <img src="test2.jpg" alt="Test photo">
+            </div>
+
+            <div class="project-info">
+              <span class="project-name">
+                Field Notes
+              </span>
+
+              <span class="project-type">
+                Web / 2026
+              </span>
+            </div>
+
+          </a>
+
+
+          <a href="#" class="project">
+
+            <div class="project-image">
+              <img src="test3.jpg" alt="Test photo">
+            </div>
+
+            <div class="project-info">
+              <span class="project-name">
+                Common Ground
+              </span>
+
+              <span class="project-type">
+                Campaign / 2025
+              </span>
+            </div>
+
+          </a>
+
+
+          <a href="#" class="project">
+
+            <div class="project-image">
+              <img src="test4.jpg" alt="Test photo">
+            </div>
+
+            <div class="project-info">
+              <span class="project-name">
+                Archive No. 01
+              </span>
+
+              <span class="project-type">
+                Editorial / 2025
+              </span>
+            </div>
+
+          </a>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <section id="about">
+
+      <div class="container">
+
+        <div class="section-heading">
+
+          <span class="section-number">
+            02 / ABOUT
+          </span>
+
+          <h2 class="section-title">
+            A little<br>
+            about me.
+          </h2>
+
+        </div>
+
+
+        <div class="about-grid">
+
+          <p class="about-note">
+            Currently located in<br>
+            sumulong st. purok 4, Baguio City, Benguet.Philippines.
+          </p>
+
+          <div>
+
+            <p class="about-text">
+              I like making things that feel
+              <span>Simple, Aesthetic, Lo-fi, Cute.</span>
+            </p>
+
+            <div class="about-details">
+
+              <div>
+                <span class="detail-label">Experience</span>
+                2 years
+              </div>
+
+              <div>
+                <span class="detail-label">Focus</span>
+                Design & Development
+              </div>
+
+              <div>
+                <span class="detail-label">Available</span>
+                Freelance / Selected projects
+              </div>
+
+              <div>
+                <span class="detail-label">Timezone</span>
+                GMT +8
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- SERVICES -->
+
+    <section id="services">
+
+      <div class="container">
+
+        <div class="section-heading">
+
+          <span class="section-number">
+            03 / SERVICES
+          </span>
+
+          <h2 class="section-title">
+            Making the best of all!!!<br>
+          </h2>
+
+        </div>
+
+
+        <div class="services">
+
+          <div class="service">
+
+            <span class="service-number">01</span>
+
+            <h3>Web Design</h3>
+
+            <p>
+              Clean, responsive websites with thoughtful and simple
+              typography, layout and cute interaction.
+            </p>
+
+          </div>
+
+
+          <div class="service">
+
+            <span class="service-number">0245</span>
+
+            <h3>Development</h3>
+
+            <p>
+              Lightweight, accessible front-end builds
+              using clean HTML and CSS.
+            </p>
+
+          </div>
+
+
+          <div class="service">
+
+            <span class="service-number">03</span>
+
+            <h3>Branding</h3>
+
+            <p>
+              Simple visual identities, art direction,
+              Lo-fi, and supporting systems.
+            </p>
+
+          </div>
+
+
+          <div class="service">
+
+            <span class="service-number">04</span>
+
+            <h3>Creative Direction</h3>
+
+            <p>
+              Helping shape ideas into clear and consistent
+              visual experiences.
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- NOTES -->
+
+    <section id="notes">
+
+      <div class="container">
+
+        <div class="section-heading">
+
+          <span class="section-number">
+            04 / NOTES
+          </span>
+
+          <h2 class="section-title">
+            Things I've<br>
+            been thinking about doing the best websites in the world.
+          </h2>
+
+        </div>
+
+
+        <div class="notes">
+
+          <a href="#" class="note">
+
+            <span class="note-date">
+              SEP 22 2026
+            </span>
+
+            <span class="note-title">
+              Designing with heart
+            </span>
+
+            <span class="note-arrow">
+              ↗
+            </span>
+
+          </a>
+
+
+          <a href="#" class="note">
+
+            <span class="note-date">
+              AUG 23 2026
+            </span>
+
+            <span class="note-title">
+              Why simple websites still matter
+            </span>
+
+            <span class="note-arrow">
+              ↗
+            </span>
+
+          </a>
+
+
+          <a href="#" class="note">
+
+            <span class="note-date">
+              JUL 2026
+            </span>
+
+            <span class="note-title">
+              Notes on typography
+            </span>
+
+            <span class="note-arrow">
+              ↗
+            </span>
+
+          </a>
+
+
+          <a href="#" class="note">
+
+            <span class="note-date">
+              JUN 2026
+            </span>
+
+            <span class="note-title">
+              Building things slowly
+            </span>
+
+            <span class="note-arrow">
+              ↗
+            </span>
+
+          </a>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- CONTACT -->
+
+    <section class="contact" id="contact">
+
+      <div class="container">
+
+        <span class="small-label">
+          05 / CONTACT
+        </span>
+
+        <h2 class="contact-title">
+          Got something<br>
+          <em>in mind?</em>
+        </h2>
+
+
+        <div class="contact-bottom">
+
+          <a
+            href="mailto:FortesRobinson@gmail.com"
+            class="email"
+          >
+            helloworld.com ↗
+          </a>
+
+          <p class="contact-location">
+            Baguio city, Philippines<br>
+            available worldwide
+          </p>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <footer>
+
+    <div class="container footer-inner">
+
+      <span>
+        © 2026 Fortes web and designs. Contact No: 09327124557
+      </span>
+
+      <span>
+        Built with HTML + CSS
+      </span>
+
+    </div>
+
+  </footer>
+
+</body>
+</html>
