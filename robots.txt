@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://lofi-twinx.netlify.app/sitemap.xml
